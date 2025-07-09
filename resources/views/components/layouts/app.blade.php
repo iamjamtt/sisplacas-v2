@@ -6,9 +6,9 @@
         <meta name="author" content="Universidad Nacional de Ucayali" />
         <meta name="description" content="Sistema de Placas UNIA" />
 
-        <title>{{ $title ?? 'REGISTROS ACADÉMICOS UNIA' }}</title>
+        <title>{{ $title ?? 'SISPLACAS V2' }}</title>
 
-        <link rel="shortcut icon" href="{{ asset('assets/files/logo-unia.webp') }}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('assets/files/logo-carro.png') }}" type="image/x-icon">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,10 +33,10 @@
             <flux:brand href="{{ route('inicio.index') }}" wire:navigate>
                 <x-slot name="name">
                     <span class="hidden lg:flex">
-                        REGISTROS ACADÉMICOS UNIA
+                        SISPLACAS V2
                     </span>
                     <span class="lg:hidden">
-                        REG. ACA. UNIA
+                        SISPLACAS
                     </span>
                 </x-slot>
                 <x-slot
@@ -44,7 +44,7 @@
                     class="flex aspect-square size-10 items-center justify-center rounded-lg bg-white dark:bg-zinc-700 border border-zinc-200 border-b-zinc-300/80 dark:border-zinc-600 shadow-xs"
                 >
                     <img
-                        src="{{ asset('assets/files/logo-unia.webp') }}"
+                        src="{{ asset('assets/files/logo-carro.png') }}"
                         alt="Logo"
                         class="size-6 fill-current text-white dark:text-black"
                     />
@@ -54,7 +54,7 @@
             <flux:spacer />
 
             <flux:dropdown x-data align="end">
-                <flux:button variant="subtle" square class="group" aria-label="Preferred color scheme">
+                <flux:button variant="subtle" square class="group cursor-pointer" aria-label="Preferred color scheme">
                     <flux:icon.sun x-show="$flux.appearance === 'light'" x-cloak variant="mini" class="text-zinc-500 dark:text-white" />
                     <flux:icon.moon x-show="$flux.appearance === 'dark'" x-cloak variant="mini" class="text-zinc-500 dark:text-white" />
                     <flux:icon.moon x-show="$flux.appearance === 'system' && $flux.dark" x-cloak variant="mini" />
@@ -75,14 +75,14 @@
 
             <flux:brand href="{{ route('inicio.index') }}" class="lg:hidden" wire:navigate>
                 <x-slot name="name">
-                    REG. ACA. UNIA
+                    SISPLACAS V2
                 </x-slot>
                 <x-slot
                     name="logo"
                     class="flex aspect-square size-10 items-center justify-center rounded-lg bg-white hover:bg-zinc-50 dark:bg-zinc-700 dark:hover:bg-zinc-600/75 border border-zinc-200 hover:border-zinc-200 border-b-zinc-300/80 dark:border-zinc-600 dark:hover:border-zinc-600 shadow-xs"
                 >
                     <img
-                        src="{{ asset('assets/files/logo-unia.webp') }}"
+                        src="{{ asset('assets/files/logo-carro.png') }}"
                         alt="Logo"
                         class="size-6 fill-current text-white dark:text-black"
                     />
@@ -91,7 +91,6 @@
 
             <flux:navlist variant="outline" class="space-y-4">
                 <flux:navlist.group>
-                    @rol(\App\Enums\RolEnum::ADMIN->value, \App\Enums\RolEnum::GESTOR->value)
                     <flux:navlist.item
                         :href="route('inicio.index')"
                         :current="request()->routeIs('inicio.*')"
@@ -102,58 +101,34 @@
                         </x-slot>
                         Inicio
                     </flux:navlist.item>
-                    @endrol
-                    @rol(\App\Enums\RolEnum::ADMIN->value, \App\Enums\RolEnum::GESTOR->value)
                     <flux:navlist.item
-                        :href="route('registros.index')"
-                        :current="request()->routeIs('registros.*')"
+                        {{-- :href="route('registros.index')" --}}
+                        {{-- :current="request()->routeIs('registros.*')" --}}
                         wire:navigate
                     >
                         <x-slot name="icon">
-                            <i class="ki-filled ki-document mt-1 text-lg"></i>
+                            <i class="ki-filled ki-delivery mt-1 text-lg"></i>
                         </x-slot>
-                        Registros
+                        Vehiculos
                     </flux:navlist.item>
-                    @endrol
-                    @rol(\App\Enums\RolEnum::ADMIN->value, \App\Enums\RolEnum::GESTOR->value)
                     <flux:navlist.item
-                        :href="route('reportes.index')"
-                        :current="request()->routeIs('reportes.*')"
-                        {{-- wire:navigate --}}
+                        {{-- :href="route('registros.index')" --}}
+                        {{-- :current="request()->routeIs('registros.*')" --}}
+                        wire:navigate
                     >
                         <x-slot name="icon">
-                            <i class="ki-filled ki-chart-simple mt-1 text-lg"></i>
+                            <i class="ki-filled ki-share mt-1 text-lg"></i>
                         </x-slot>
-                        Reportes
+                        Gestion de Control
                     </flux:navlist.item>
-                    @endrol
                 </flux:navlist.group>
 
-                @rol(\App\Enums\RolEnum::ADMIN->value)
-                <flux:navlist.group
-                    heading="Seguridad"
-                >
-                    @rol(\App\Enums\RolEnum::ADMIN->value)
-                    <flux:navlist.item
-                        :href="route('usuarios.index')"
-                        :current="request()->routeIs('usuarios.*')"
-                        wire:navigate
-                    >
-                        <x-slot name="icon">
-                            <i class="ki-filled ki-users mt-1 text-lg"></i>
-                        </x-slot>
-                        Usuarios
-                    </flux:navlist.item>
-                    @endrol
-                </flux:navlist.group>
-                @endrol
             </flux:navlist>
 
             <flux:spacer />
 
             <flux:navlist variant="outline" class="space-y-4">
                 <flux:navlist.group>
-                    @rol(\App\Enums\RolEnum::ADMIN->value, \App\Enums\RolEnum::GESTOR->value)
                     <flux:navlist.item
                         :href="route('perfil.index')"
                         :current="request()->routeIs('perfil.*')"
@@ -164,11 +139,8 @@
                         </x-slot>
                         Mi perfil
                     </flux:navlist.item>
-                    @endrol
                 </flux:navlist.group>
             </flux:navlist>
-
-            <x-banner />
         </flux:sidebar>
 
         <flux:main class="!p-4">

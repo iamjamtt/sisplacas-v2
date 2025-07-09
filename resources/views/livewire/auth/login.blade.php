@@ -7,7 +7,7 @@
         >
         <div class="flex aspect-square size-22 items-center justify-center rounded-2xl bg-white dark:bg-zinc-700 border border-zinc-200 border-b-zinc-300/80 dark:border-zinc-600 shadow-xs">
             <img
-                src="{{ asset('assets/files/logo-unia.webp') }}"
+                src="{{ asset('assets/files/logo-carro.png') }}"
                 alt="Logo"
                 class="size-14 fill-current text-white dark:text-black"
             />

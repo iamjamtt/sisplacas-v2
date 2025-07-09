@@ -1,7 +1,6 @@
 <flux:dropdown position="top" align="start">
     <flux:profile
-        :avatar:name="$usuario->nombre_usu"
-        avatar="{{ $usuario->tieneFoto ? $usuario->avatar : null }}"
+        :avatar:name="$usuario->name . ' ' . $usuario->last_name"
         avatar:color="auto"
     />
     <flux:navmenu>
@@ -10,7 +9,7 @@
                 Bienvenido
             </flux:text>
             <flux:heading class="mt-1! truncate">
-                {{ $usuario->nombre_usu ?? '' }}
+                {{ $usuario->name . ' ' . $usuario->last_name }}
             </flux:heading>
         </div>
         <flux:navmenu.separator />

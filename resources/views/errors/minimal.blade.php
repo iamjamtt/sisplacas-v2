@@ -8,7 +8,7 @@
 
     <title>@yield('title')</title>
 
-    <link rel="shortcut icon" href="{{ asset('assets/files/logo-unia.webp') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/files/logo-carro.png') }}" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

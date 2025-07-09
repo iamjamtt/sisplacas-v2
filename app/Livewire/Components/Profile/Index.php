@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Components\Profile;
 
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Index extends Component
 {
-    public ?Usuario $usuario;
+    public ?User $usuario;
 
     public function render()
     {
