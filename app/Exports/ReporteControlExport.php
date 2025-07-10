@@ -13,9 +13,19 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ReporteControlExport implements FromCollection, WithHeadings, WithStyles, WithEvents, ShouldAutoSize
 {
+    protected $filtroFecha;
+
+    public function __construct($filtroFecha = null)
+    {
+        $this->filtroFecha = $filtroFecha;
+    }
+
     public function collection()
     {
         return Control::with(['vehiculo'])
+            ->when($this->filtroFecha, function ($query) {
+                $query->whereDate('fecha', '=', $this->filtroFecha);
+            })
             ->get()
             ->map(function ($control) {
                 return [
