@@ -18,6 +18,9 @@ class Index extends Component
     #[Url(except: '')]
     public $buscar = '';
 
+    #[Url(except: null, as: 'f_fecha')]
+    public $filtroFecha;
+
     public $foto1;
     public $foto2;
     public $placa;
@@ -51,6 +54,9 @@ class Index extends Component
                     'marca',
                     'modelo',
                 ], 'like', '%' . $buscar . '%');
+            })
+            ->when($this->filtroFecha, function ($query) {
+                $query->whereDate('fecha', '=', $this->filtroFecha);
             })
             ->orderBy('id', 'desc')
             ->paginate(10);
@@ -89,7 +95,7 @@ class Index extends Component
         try {
             $nombreArchivo = 'reporte_control_' . now()->format('Ymd_His') . '.xlsx';
             $this->dispatch('toast', message: 'Reporte generado exitosamente', type: 'success');
-            return Excel::download(new ReporteControlExport, $nombreArchivo);
+            return Excel::download(new ReporteControlExport($this->filtroFecha), $nombreArchivo);
         } catch (\Exception $e) {
             $this->dispatch('toast', message: 'Error al generar el reporte: ' . $e->getMessage(), type: 'error');
             return;

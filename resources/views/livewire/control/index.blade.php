@@ -14,12 +14,13 @@
     </x-head>
 
     <div class="grid grid-cols-1 gap-4">
-        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-4 w-full md:w-sm">
                 <flux:input
                     icon="magnifying-glass"
-                    placeholder="Buscar"
+                    placeholder="Buscar por placa y conductor..."
                     wire:model.live.debounce.500ms="buscar"
+                    label="Filtro búsqueda"
                 >
                     <x-slot name="iconTrailing">
                         <flux:button
@@ -32,6 +33,22 @@
                     </x-slot>
                 </flux:input>
             </div>
+            <flux:input
+                type="date"
+                wire:model.live.debounce.500ms="filtroFecha"
+                label="Filtro fecha"
+                class="w-full md:w-64"
+            >
+                <x-slot name="iconTrailing">
+                    <flux:button
+                        size="sm"
+                        variant="subtle"
+                        icon="x-mark"
+                        class="-mr-1"
+                        x-on:click="$wire.set('filtroFecha', null)"
+                    />
+                </x-slot>
+            </flux:input>
         </div>
 
         <x-card wire:poll.15s>
@@ -152,12 +169,12 @@
                 <div
                     class="absolute inset-0 bg-white dark:bg-zinc-800 opacity-50"
                     wire:loading
-                    wire:target="buscar, gotoPage, nextPage, previousPage"
+                    wire:target="buscar, gotoPage, nextPage, previousPage, filtroFecha"
                 ></div>
                 <div
                     class="flex justify-center items-center absolute inset-0 bd-white dark:bd-zinc-800 opacity-50"
                     wire:loading.flex
-                    wire:target="buscar, gotoPage, nextPage, previousPage"
+                    wire:target="buscar, gotoPage, nextPage, previousPage, filtroFecha"
                 >
                     <flux:icon.loading class="size-8" />
                 </div>
