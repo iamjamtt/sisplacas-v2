@@ -112,8 +112,8 @@
                         Vehiculos
                     </flux:navlist.item>
                     <flux:navlist.item
-                        {{-- :href="route('registros.index')" --}}
-                        {{-- :current="request()->routeIs('registros.*')" --}}
+                        :href="route('control.index')"
+                        :current="request()->routeIs('control.*')"
                         wire:navigate
                     >
                         <x-slot name="icon">
