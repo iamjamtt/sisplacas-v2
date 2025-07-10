@@ -7,7 +7,7 @@
             </flux:breadcrumbs>
         </x-slot>
         <x-slot name="button">
-            <flux:button icon="arrow-down-tray" variant="primary" class="cursor-pointer">
+            <flux:button icon="arrow-down-tray" variant="primary" class="cursor-pointer" wire:click="exportar">
                 Exportar
             </flux:button>
         </x-slot>

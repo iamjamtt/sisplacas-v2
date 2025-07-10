@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Control;
 
+use App\Exports\ReporteControlExport;
 use App\Models\Control;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
@@ -80,5 +82,17 @@ class Index extends Component
         }
 
         $this->modal('modal-ver-fotos')->show();
+    }
+
+    public function exportar()
+    {
+        try {
+            $nombreArchivo = 'reporte_control_' . now()->format('Ymd_His') . '.xlsx';
+            $this->dispatch('toast', message: 'Reporte generado exitosamente', type: 'success');
+            return Excel::download(new ReporteControlExport, $nombreArchivo);
+        } catch (\Exception $e) {
+            $this->dispatch('toast', message: 'Error al generar el reporte: ' . $e->getMessage(), type: 'error');
+            return;
+        }
     }
 }
