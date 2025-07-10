@@ -22,6 +22,13 @@
                     </div>
                 </x-card.body>
             </x-card>
+            <div class="lg:col-span-4 grid grid-cols-2 gap-4" wire:ignore>
+                <x-card>
+                    <x-card.body>
+                        <div id="chart"></div>
+                    </x-card.body>
+                </x-card>
+            </div>
         </div>
 
         {{-- <x-card class="p-4">
@@ -53,3 +60,69 @@
         </x-card> --}}
     </div>
 </div>
+
+@script
+<script>
+    const listado = @json($this->getDataChart);
+
+    const options = {
+        series: [{
+            name: 'Cantidad',
+            data: Object.values(listado)
+        }],
+            chart: {
+            type: 'bar',
+            height: 350
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                borderRadius: 5,
+                borderRadiusApplication: 'end'
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        xaxis: {
+            categories: Object.keys(listado),
+        },
+        yaxis: {
+            title: {
+                text: 'Cantidad'
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " registros"
+                }
+            }
+        },
+        theme: {
+            palette: 'palette3' // upto palette10
+        },
+        title: {
+            text: 'Cantidad de vehiculos registrados en los ultimos 6 días',
+            align: 'center',
+            style: {
+                fontSize: '16px',
+                fontWeight: 'bold',
+                color: '#263238'
+            }
+        },
+    };
+
+    const chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+</script>
+@endscript
