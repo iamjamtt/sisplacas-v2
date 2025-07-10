@@ -3,6 +3,8 @@
 namespace App\Livewire\Inicio;
 
 use App\Models\Control;
+use App\Models\Vehiculo;
+use Carbon\Carbon;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -10,9 +12,22 @@ use Livewire\Component;
 #[Title('Inicio | REGISTROS ACADEMICOS UNIA')]
 class Index extends Component
 {
+    public $vehiculos_count;
+    public $control_days_count;
+    public $control_week_count;
+    public $control_month_count;
+
     public function render()
     {
         return view('livewire.inicio.index');
+    }
+
+    public function mount()
+    {
+        $this->vehiculos_count = Vehiculo::count();
+        $this->control_days_count = Control::where('fecha', today())->count();
+        $this->control_week_count = Control::whereBetween('fecha', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
+        $this->control_month_count = Control::whereMonth('fecha', Carbon::now()->month)->count();
     }
 
     #[Computed()]
