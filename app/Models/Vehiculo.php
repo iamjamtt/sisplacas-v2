@@ -22,10 +22,16 @@ class Vehiculo extends Model
     ];
 
     protected $casts = [
+        'estado' => 'boolean',
         'tieneSancion' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
+
+    public function sancion()
+    {
+        return $this->belongsTo(TipoSancion::class, 'id_tipes_sanctions', 'id');
+    }
 
     public function controles()
     {
