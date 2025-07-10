@@ -102,8 +102,8 @@
                         Inicio
                     </flux:navlist.item>
                     <flux:navlist.item
-                        {{-- :href="route('registros.index')" --}}
-                        {{-- :current="request()->routeIs('registros.*')" --}}
+                        :href="route('vehiculo.index')"
+                        :current="request()->routeIs('vehiculo.*')"
                         wire:navigate
                     >
                         <x-slot name="icon">
