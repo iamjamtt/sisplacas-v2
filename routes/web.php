@@ -3,10 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Livewire\Auth\Login as AuthLogin;
-
 use App\Livewire\Inicio\Index as InicioIndex;
-
 use App\Livewire\Perfil\Index as PerfilIndex;
+use App\Livewire\Vehiculo\Index as VehiculoIndex;
 
 //
 
@@ -23,3 +22,7 @@ Route::get('/inicio', InicioIndex::class)
 Route::get('/perfil', PerfilIndex::class)
     ->middleware(['auth'])
     ->name('perfil.index');
+
+Route::get('/vehiculos', VehiculoIndex::class)
+    ->middleware(['auth'])
+    ->name('vehiculo.index');
