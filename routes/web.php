@@ -6,6 +6,7 @@ use App\Livewire\Auth\Login as AuthLogin;
 use App\Livewire\Inicio\Index as InicioIndex;
 use App\Livewire\Perfil\Index as PerfilIndex;
 use App\Livewire\Vehiculo\Index as VehiculoIndex;
+use App\Livewire\Control\Index as ControlIndex;
 
 //
 
@@ -26,3 +27,7 @@ Route::get('/perfil', PerfilIndex::class)
 Route::get('/vehiculos', VehiculoIndex::class)
     ->middleware(['auth'])
     ->name('vehiculo.index');
+
+Route::get('/controles', ControlIndex::class)
+    ->middleware(['auth'])
+    ->name('control.index');
