@@ -6,11 +6,13 @@ use App\Exports\ReporteControlExport;
 use App\Models\Control;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 
+#[Title('Gestion de Controles')]
 class Index extends Component
 {
     use WithPagination;

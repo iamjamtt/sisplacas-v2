@@ -10,7 +10,7 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-#[Title('Login | REGISTROS ACADEMICOS UNIA')]
+#[Title('Login')]
 #[Layout('components.layouts.auth')]
 class Login extends Component
 {
