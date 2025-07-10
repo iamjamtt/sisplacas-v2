@@ -78,7 +78,17 @@
                                     </flux:badge>
                                 </td>
                                 <td class="border-l border-zinc-200 dark:border-zinc-700 p-2">
-                                    {{ $item->vehiculo->nombre_completo }}
+                                    <div class="flex items-center gap-2">
+                                        {{ $item->vehiculo->nombre_completo }}
+                                        @if ($item->vehiculo->tieneSancion)
+                                            <flux:tooltip toggleable>
+                                                <flux:button icon="information-circle" size="sm" variant="ghost" class="text-red-500!" />
+                                                <flux:tooltip.content class="max-w-[20rem] space-y-2">
+                                                    <p><b>Vehiculo con sanción:</b> "{{ $item->vehiculo->sancion->nombre }}"</p>
+                                                </flux:tooltip.content>
+                                            </flux:tooltip>
+                                        @endif
+                                    </div>
                                 </td>
                                 <td class="border-l border-zinc-200 dark:border-zinc-700 p-2 text-center">
                                     {{ $item->ingreso->format('H:i a d/m/Y') }}
