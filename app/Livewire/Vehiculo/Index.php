@@ -121,6 +121,8 @@ class Index extends Component
 
         $this->apellido = mb_strtoupper($this->apellido);
         $this->nombre = mb_strtoupper($this->nombre);
+        $this->marca = mb_strtoupper($this->marca);
+        $this->modelo = mb_strtoupper($this->modelo);
 
         try {
             DB::beginTransaction();
