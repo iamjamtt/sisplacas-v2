@@ -79,7 +79,7 @@
                                 </td>
                                 <td class="border-l border-zinc-200 dark:border-zinc-700 p-2">
                                     <div class="flex items-center gap-2">
-                                        {{ $item->vehiculo->nombre_completo }}
+                                        {{ $item->vehiculo->conductor ? $item->vehiculo->conductor : $item->vehiculo->nombre_completo }}
                                         @if ($item->vehiculo->tieneSancion)
                                             <flux:tooltip toggleable>
                                                 <flux:button icon="information-circle" size="sm" variant="ghost" class="text-red-500!" />
