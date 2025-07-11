@@ -31,7 +31,8 @@ class ReporteControlExport implements FromCollection, WithHeadings, WithStyles, 
                 return [
                     'ID' => $control->id,
                     'Placa' => $control->vehiculo->placa,
-                    'Conductor' => $control->vehiculo->nombre_completo,
+                    'Dueño' => $control->vehiculo->nombre_completo,
+                    'Conductor' => $control->vehiculo->conductor ? $control->vehiculo->conductor : $control->vehiculo->nombre_completo,
                     'Marca' => $control->vehiculo->marca,
                     'Modelo' => $control->vehiculo->modelo,
                     'Fecha Ingreso' => $control->ingreso->format('H:i:s d/m/Y'),
@@ -44,7 +45,7 @@ class ReporteControlExport implements FromCollection, WithHeadings, WithStyles, 
 
     public function headings(): array
     {
-        return ['ID', 'Placa', 'Conductor', 'Marca', 'Modelo', 'Fecha Ingreso', 'Fecha Salida', 'Tiene Sanción', 'Sanción'];
+        return ['ID', 'Placa', 'Dueño', 'Conductor', 'Marca', 'Modelo', 'Fecha Ingreso', 'Fecha Salida', 'Tiene Sanción', 'Sanción'];
     }
 
      public function styles(Worksheet $sheet)
@@ -83,11 +84,11 @@ class ReporteControlExport implements FromCollection, WithHeadings, WithStyles, 
 
                 // Centrar columnas específicas
                 $sheet->getStyle("A2:A{$lastRow}")->getAlignment()->setHorizontal('center');
-                $sheet->getStyle("D2:D{$lastRow}")->getAlignment()->setHorizontal('center');
                 $sheet->getStyle("E2:E{$lastRow}")->getAlignment()->setHorizontal('center');
                 $sheet->getStyle("F2:F{$lastRow}")->getAlignment()->setHorizontal('center');
                 $sheet->getStyle("G2:G{$lastRow}")->getAlignment()->setHorizontal('center');
                 $sheet->getStyle("H2:H{$lastRow}")->getAlignment()->setHorizontal('center');
+                $sheet->getStyle("I2:I{$lastRow}")->getAlignment()->setHorizontal('center');
 
                 // Cabecera fija
                 $sheet->freezePane('A2');
