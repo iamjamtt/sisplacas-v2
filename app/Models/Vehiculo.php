@@ -15,6 +15,7 @@ class Vehiculo extends Model
         'apellido',
         'nombre',
         'nombre_completo',
+        'conductor',
         'marca',
         'modelo',
         'estado',
