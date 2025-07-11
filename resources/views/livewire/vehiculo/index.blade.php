@@ -41,7 +41,8 @@
                         <tr>
                             <th scope="col" class="border-l border-zinc-200 dark:border-zinc-700 font-semibold p-2 w-[10px] text-center">NRO</th>
                             <th scope="col" class="border-l border-zinc-200 dark:border-zinc-700 font-semibold p-2 w-[80px] min-w-[65px] text-center">PLACA</th>
-                            <th scope="col" class="border-l border-zinc-200 dark:border-zinc-700 font-semibold p-2 min-w-sm">CONDUCTOR</th>
+                            <th scope="col" class="border-l border-zinc-200 dark:border-zinc-700 font-semibold p-2 min-w-xs">DUEÑO</th>
+                            <th scope="col" class="border-l border-zinc-200 dark:border-zinc-700 font-semibold p-2">CONDUCTOR</th>
                             <th scope="col" class="border-l border-zinc-200 dark:border-zinc-700 font-semibold p-2">MARCA</th>
                             <th scope="col" class="border-l border-zinc-200 dark:border-zinc-700 font-semibold p-2">MODELO</th>
                             <th scope="col" class="border-l border-zinc-200 dark:border-zinc-700 font-semibold p-2 text-center">SANCION</th>
@@ -63,6 +64,9 @@
                                 </td>
                                 <td class="border-l border-zinc-200 dark:border-zinc-700 p-2">
                                     {{ $item->nombre_completo }}
+                                </td>
+                                <td class="border-l border-zinc-200 dark:border-zinc-700 p-2">
+                                    {{ $item->conductor ? $item->conductor : $item->nombre_completo }}
                                 </td>
                                 <td class="border-l border-zinc-200 dark:border-zinc-700 p-2">
                                     {{ $item->marca }}
@@ -315,6 +319,22 @@
                                 @endforeach
                             </flux:select>
                             <flux:error name="sancion" />
+                        </flux:field>
+                        <flux:field variant="inline">
+                            <flux:checkbox wire:model.live="tieneDiferenteConductor" />
+                            <flux:label>¿Tiene diferente conductor?</flux:label>
+                            <flux:error name="tieneDiferenteConductor" />
+                        </flux:field>
+                        <flux:field wire:transition x-show="$wire.tieneDiferenteConductor" x-cloak>
+                            <flux:label>
+                                Conductor <span class="text-red-500 ml-2">*</span>
+                            </flux:label>
+                            <flux:input
+                                oninput="this.value = this.value.toUpperCase()"
+                                wire:model.live="conductor"
+                                placeholder="Ingrese el nombre del conductor..."
+                            />
+                            <flux:error name="conductor" />
                         </flux:field>
                     </div>
 

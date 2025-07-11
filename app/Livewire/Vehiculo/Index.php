@@ -35,6 +35,9 @@ class Index extends Component
     public bool $tieneSancion = false;
     #[Validate('nullable|integer', as: 'sanción')]
     public ?int $sancion = null;
+    public bool $tieneDiferenteConductor = false;
+    #[Validate('nullable|string', as: 'conductor')]
+    public string $conductor = '';
 
     public bool $modalEditar = false;
 
@@ -96,6 +99,12 @@ class Index extends Component
         $this->resetValidation();
     }
 
+    public function cerrarModal(): void
+    {
+        $this->modal('modal-vehiculo')->close();
+        $this->limpiar();
+    }
+
     public function cargarData($id = null, $modalEditar = false): void
     {
         $this->limpiar();
@@ -110,6 +119,8 @@ class Index extends Component
             $this->modelo = $this->vehiculo->modelo;
             $this->tieneSancion = $this->vehiculo->tieneSancion;
             $this->sancion = $this->vehiculo->id_tipes_sanctions ?? null;
+            $this->tieneDiferenteConductor = !is_null($this->vehiculo->conductor);
+            $this->conductor = $this->vehiculo->conductor ?? '';
         } else {
             $this->vehiculo = new Vehiculo();
         }
@@ -125,6 +136,7 @@ class Index extends Component
         $this->nombre = mb_strtoupper($this->nombre);
         $this->marca = mb_strtoupper($this->marca);
         $this->modelo = mb_strtoupper($this->modelo);
+        $this->conductor = mb_strtoupper($this->conductor);
 
         try {
             DB::beginTransaction();
@@ -143,6 +155,7 @@ class Index extends Component
             if ($this->modalEditar == false) {
                 $this->vehiculo->estado = true;
             }
+            $this->vehiculo->conductor = $this->tieneDiferenteConductor ? $this->conductor : null;
             $this->vehiculo->save();
 
             DB::commit();
